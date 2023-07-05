@@ -35,39 +35,21 @@ import com.example.cinematickets.ui.theme.Sans
 
 @Composable
 fun HomeContent() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.background),
-            contentDescription = null,
-            modifier = Modifier.height(200.dp),
-            contentScale = ContentScale.FillBounds
-        )
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            SpacerVertical32()
-            HeaderButtons()
-            SpacerVertical32()
-            Box(
-                modifier = Modifier
-                    .height(395.dp)
-                    .fillMaxWidth()
-                    .weight(1f)
-            ) {
-                ViewPager()
-            }
-            SpacerVertical32()
-            ClockImage()
-            SpacerVertical16()
-            MovieTitle()
-            SpacerVertical32()
-            GenresChips()
-            BottomNavigation()
-        }
+        SpacerVertical32()
+        HeaderButtons()
+        SpacerVertical32()
+        Box(modifier = Modifier.height(395.dp).fillMaxWidth().weight(1f)) { ViewPager() }
+        SpacerVertical32()
+        ClockImage()
+        SpacerVertical16()
+        MovieTitle()
+        SpacerVertical32()
+        GenresChips()
+        BottomNavigation()
     }
 }
 
