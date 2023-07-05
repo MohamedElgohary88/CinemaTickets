@@ -2,9 +2,11 @@ package com.example.cinematickets.screens.home_screen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -32,26 +35,42 @@ import com.example.cinematickets.ui.theme.Sans
 
 @Composable
 fun HomeContent() {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
     ) {
-        SpacerVertical32()
-        HeaderButtons()
-        SpacerVertical32()
-        Box(modifier = Modifier
-            .height(395.dp)
-            .fillMaxWidth()
-            .weight(1f)) { ViewPager() }
-        SpacerVertical32()
-        ClockImage()
-        SpacerVertical16()
-        MovieTitle()
-        SpacerVertical32()
-        GenresChips()
-        BottomNavigation()
+        Image(
+            painter = painterResource(id = R.drawable.background),
+            contentDescription = null,
+            modifier = Modifier.height(200.dp),
+            contentScale = ContentScale.FillBounds
+        )
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            SpacerVertical32()
+            HeaderButtons()
+            SpacerVertical32()
+            Box(
+                modifier = Modifier
+                    .height(395.dp)
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) {
+                ViewPager()
+            }
+            SpacerVertical32()
+            ClockImage()
+            SpacerVertical16()
+            MovieTitle()
+            SpacerVertical32()
+            GenresChips()
+            BottomNavigation()
+        }
     }
 }
+
 
 @Composable
 fun HeaderButtons() {
