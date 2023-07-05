@@ -2,10 +2,8 @@ package com.example.cinematickets.screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -32,7 +30,6 @@ import com.example.cinematickets.composable.SpacerVertical32
 import com.example.cinematickets.ui.theme.Black
 import com.example.cinematickets.ui.theme.Orange
 import com.example.cinematickets.ui.theme.Sans
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 
 @Preview(showSystemUi = true)

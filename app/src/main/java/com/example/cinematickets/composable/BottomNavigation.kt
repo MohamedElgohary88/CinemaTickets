@@ -5,25 +5,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,7 +21,7 @@ import com.example.cinematickets.R
 import com.example.cinematickets.ui.theme.Orange
 
 
-@Preview()
+@Preview
 @Composable
 fun BottomNavigation() {
     BottomAppBar(
@@ -40,8 +30,7 @@ fun BottomNavigation() {
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically
+            horizontalArrangement = Arrangement.SpaceAround
         ) {
             BottomAppBarItem(drawableResId = R.drawable.movie, selected = true)
             BottomAppBarItem(drawableResId = R.drawable.search, selected = false)
@@ -59,7 +48,7 @@ fun BottomAppBarItem(drawableResId: Int, selected: Boolean) {
 
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.size(46.dp)
+        modifier = Modifier.size(48.dp)
     ) {
         Box(
             contentAlignment = Alignment.Center,
