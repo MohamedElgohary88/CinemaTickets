@@ -5,9 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -27,6 +25,8 @@ import com.example.cinematickets.composable.BottomNavigation
 import com.example.cinematickets.composable.SpacerHorizontal8
 import com.example.cinematickets.composable.SpacerVertical16
 import com.example.cinematickets.composable.SpacerVertical32
+import com.example.cinematickets.composable.ViewPagerScreen
+import com.example.cinematickets.composable.imageList
 import com.example.cinematickets.ui.theme.Black
 import com.example.cinematickets.ui.theme.Orange
 import com.example.cinematickets.ui.theme.Sans
@@ -67,14 +67,7 @@ fun HomeScreen() {
             }
         }
         SpacerVertical32()
-        Image(
-            painter = painterResource(id = R.drawable.image_1),
-            modifier = Modifier
-                .height(380.dp)
-                .width(260.dp),
-            contentScale = ContentScale.Fit,
-            contentDescription = "Movie Image"
-        )
+        ViewPagerScreen(imageList = imageList)
         SpacerVertical32()
         Row(verticalAlignment = Alignment.CenterVertically) {
             Image(painter = painterResource(id = R.drawable.clock), contentDescription = null)
@@ -123,4 +116,5 @@ fun HomeScreen() {
         }
         BottomNavigation()
     }
+
 }
