@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cinematickets.R
+import com.example.cinematickets.composable.BottomNavigation
 import com.example.cinematickets.composable.SpacerHorizontal8
 import com.example.cinematickets.composable.SpacerVertical16
 import com.example.cinematickets.composable.SpacerVertical32
@@ -88,7 +89,7 @@ fun HomeScreen() {
         }
         SpacerVertical16()
         Text(
-            text = "Fantastic Beasts: The Secrets of Dumbledore",
+            text = "Fantastic Beasts: The \n Secrets of Dumbledore",
             color = Color.Black,
             fontFamily = Sans,
             fontWeight = FontWeight.Normal,
@@ -123,5 +124,6 @@ fun HomeScreen() {
                 )
             }
         }
+        BottomNavigation()
     }
 }
