@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,15 +31,15 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.cinematickets.R
 import com.example.cinematickets.composable.BookingButton
 import com.example.cinematickets.composable.Chip
+import com.example.cinematickets.composable.CloseButton
 import com.example.cinematickets.composable.ColoredText
 import com.example.cinematickets.composable.PeopleList
 import com.example.cinematickets.composable.SpacerHorizontal
 import com.example.cinematickets.composable.SpacerVertical
 import com.example.cinematickets.screens.home_screen.MovieTitle
-import com.example.cinematickets.ui.theme.Black
 import com.example.cinematickets.ui.theme.Black67
-import com.example.cinematickets.ui.theme.Blur
-import com.example.cinematickets.ui.theme.Blur2
+import com.example.cinematickets.ui.theme.TealBlur
+import com.example.cinematickets.ui.theme.OrangeBlur
 import com.example.cinematickets.ui.theme.Orange
 import com.example.cinematickets.ui.theme.Sans
 
@@ -49,7 +48,6 @@ import com.example.cinematickets.ui.theme.Sans
 fun MovieDetailsContent() {
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
         val (play, timer, movieImage, close, bottomSheet) = createRefs()
-
         Image(
             painter = painterResource(id = R.drawable.movie_details),
             contentDescription = "movie image",
@@ -62,11 +60,17 @@ fun MovieDetailsContent() {
             contentScale = ContentScale.Crop
         )
 
+        CloseButton(background = OrangeBlur.copy(alpha = .87f),
+            modifier = Modifier.constrainAs(close) {
+                start.linkTo(parent.start)
+                top.linkTo(parent.top)
+            })
+
         Row(
             modifier = Modifier
                 .padding(end = 16.dp)
                 .clip(shape = RoundedCornerShape(16.dp))
-                .background(color = Blur.copy(alpha = .87f))
+                .background(color = TealBlur.copy(alpha = .87f))
                 .constrainAs(timer) {
                     end.linkTo(parent.end)
                     top.linkTo(close.top)
@@ -88,29 +92,7 @@ fun MovieDetailsContent() {
             )
         }
 
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .padding(16.dp)
-                .size(48.dp)
-                .constrainAs(close) {
-                    start.linkTo(parent.start)
-                    top.linkTo(parent.top)
-                }
-        ) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .size(48.dp)
-                    .background(Blur2.copy(alpha = .87f), shape = CircleShape)
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.circle),
-                    contentDescription = null,
-                    tint = Color.White
-                )
-            }
-        }
+
 
         Box(
             modifier = Modifier
@@ -156,8 +138,9 @@ fun MovieDetailsContent() {
             MovieTitle()
             SpacerVertical(space = 20)
             Row {
-                Chip(text = "Fantasy")
-                Chip(text = "Adventure")
+                Chip(text = "Fantasy",false, onClick = {})
+                SpacerHorizontal(space = 4)
+                Chip(text = "Adventure",false, onClick = {})
             }
             SpacerVertical(space = 20)
             PeopleList()

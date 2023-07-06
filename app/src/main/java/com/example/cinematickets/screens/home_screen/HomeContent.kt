@@ -40,9 +40,11 @@ fun HomeContent() {
     ) {
         SpacerVertical(24)
         HeaderButtons()
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .weight(0.8f)) { ViewPager() }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(0.8f)
+        ) { ViewPager() }
         MovieLength()
         SpacerVertical(16)
         MovieTitle()
@@ -75,12 +77,12 @@ fun HeaderButtons() {
 @Composable
 fun HeaderButton(
     text: String, containerColor: Color, contentColor: Color,
-    borderColor: Color = Color.Transparent, onClick: () -> Unit = {}
+    borderColor: Color = Color.Transparent, onClick: () -> Unit = {},
 ) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor),
-        border = BorderStroke(1.dp, borderColor)
+        border = BorderStroke(1.dp, borderColor),
     ) {
         Text(
             text = text,
@@ -120,7 +122,8 @@ fun MovieTitle() {
 @Composable
 fun GenresChips() {
     Row {
-        Chip(text = "Fantasy")
-        Chip(text = "Adventure")
+        Chip(text = "Fantasy",false, onClick = {})
+        SpacerHorizontal(space = 4)
+        Chip(text = "Adventure",false, onClick = {})
     }
 }
