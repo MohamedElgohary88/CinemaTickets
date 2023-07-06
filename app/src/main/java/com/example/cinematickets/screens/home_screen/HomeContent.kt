@@ -40,7 +40,9 @@ fun HomeContent() {
     ) {
         SpacerVertical(24)
         HeaderButtons()
-        Box(modifier = Modifier.fillMaxWidth().weight(0.8f)) { ViewPager() }
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .weight(0.8f)) { ViewPager() }
         MovieLength()
         SpacerVertical(16)
         MovieTitle()
