@@ -20,7 +20,7 @@ fun WeekdayChips() {
     val totalDaysOfMonth = currentCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
     val selectedChipIndex = remember { mutableStateOf(0) }
 
-    val chipItems = List(totalDaysOfMonth) { index ->
+    val chipItems = List(totalDaysOfMonth) {
         val dayOfMonth = currentCalendar.get(Calendar.DAY_OF_MONTH)
         val dayOfWeek = currentCalendar.getDisplayName(
             Calendar.DAY_OF_WEEK,
@@ -46,20 +46,34 @@ fun WeekdayChips() {
         }
     }
 }
+
 @Composable
 fun HourChips() {
     val currentCalendar = Calendar.getInstance()
+    val totalHourOfDay = currentCalendar.getActualMaximum(Calendar.HOUR_OF_DAY)
+    val selectedChipIndex = remember { mutableStateOf(0) }
+
+    val chipItems = List(totalHourOfDay) { index ->
+        val time = currentCalendar.apply { set(Calendar.HOUR_OF_DAY, index) }.time
+        val timeString = SimpleDateFormat("h a", Locale.getDefault()).format(time)
+        timeString
+    }
+
     LazyRow(
-        modifier = Modifier.padding(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp),
     ) {
-        items(24) { hour ->
-            val time = currentCalendar.apply { set(Calendar.HOUR_OF_DAY, hour) }.time
-            val timeString = SimpleDateFormat("h a", Locale.getDefault()).format(time)
-            Chip(timeString, false, onClick = {})
+        itemsIndexed(chipItems) { index, item ->
+            ClickableText(
+                text = item,
+                isSelected = index == selectedChipIndex.value,
+                onClick = { selectedChipIndex.value = index }
+            )
         }
     }
 }
+
+
 @Composable
 fun ClickableText(text: String, isSelected: Boolean, onClick: () -> Unit) {
     Chip(text = text, selected = isSelected, onClick = onClick)
