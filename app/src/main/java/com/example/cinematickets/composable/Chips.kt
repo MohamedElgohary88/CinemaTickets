@@ -11,18 +11,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.cinematickets.ui.theme.Black
+import com.example.cinematickets.ui.theme.Black67
 import com.example.cinematickets.ui.theme.Sans
 
 @Composable
 fun Chip(text: String) {
     Surface(
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color.DarkGray),
+        border = BorderStroke(1.dp, Color.LightGray),
         modifier = Modifier.padding(horizontal = 4.dp)
     ) {
         Text(
             text = text,
-            color = Color.Black,
+            color = Black,
             fontSize = 12.sp,
             fontFamily = Sans,
             fontWeight = FontWeight.Normal,

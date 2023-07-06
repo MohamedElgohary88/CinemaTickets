@@ -41,12 +41,10 @@ fun ViewPager() {
                 Modifier
                     .fillMaxHeight()
                     .width(283.dp)
-                    .animateContentSize(animationSpec = tween(500))
             } else {
                 Modifier
                     .fillMaxHeight()
                     .width(200.dp)
-                    .animateContentSize(animationSpec = tween(500))
             }
             Image(
                 painter = painterResource(image.resId),
