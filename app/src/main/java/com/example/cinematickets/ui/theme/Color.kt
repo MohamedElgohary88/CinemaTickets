@@ -5,7 +5,10 @@ import androidx.compose.ui.graphics.Color
 val Gray = Color(0xFF989185)
 val Orange = Color(0xFFFF5524)
 val Black = Color(0xDE000000)
+val Black67 = Color(0xAB000000)
 val Teal = Color(0xFF005A52)
+val Blur = Color(0xFF3D5558)
+val Blur2 = Color(0xFFA6654A)
 
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)

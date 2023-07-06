@@ -2,11 +2,9 @@ package com.example.cinematickets.screens.home_screen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,38 +15,40 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cinematickets.R
 import com.example.cinematickets.composable.BottomNavigation
 import com.example.cinematickets.composable.Chip
-import com.example.cinematickets.composable.SpacerHorizontal8
-import com.example.cinematickets.composable.SpacerVertical16
-import com.example.cinematickets.composable.SpacerVertical32
+import com.example.cinematickets.composable.SpacerHorizontal
+import com.example.cinematickets.composable.SpacerVertical
 import com.example.cinematickets.composable.ViewPager
+import com.example.cinematickets.ui.theme.Black
 import com.example.cinematickets.ui.theme.Orange
 import com.example.cinematickets.ui.theme.Sans
 
+@Preview(showSystemUi = true)
 @Composable
 fun HomeContent() {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        SpacerVertical32()
+        SpacerVertical(24)
         HeaderButtons()
-        SpacerVertical32()
-        Box(modifier = Modifier.height(395.dp).fillMaxWidth().weight(1f)) { ViewPager() }
-        SpacerVertical32()
-        ClockImage()
-        SpacerVertical16()
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .weight(0.8f)) { ViewPager() }
+        MovieLength()
+        SpacerVertical(16)
         MovieTitle()
-        SpacerVertical32()
+        SpacerVertical(24)
         GenresChips()
+        SpacerVertical(48)
         BottomNavigation()
     }
 }
@@ -62,12 +62,12 @@ fun HeaderButtons() {
             containerColor = Orange,
             contentColor = Color.White
         )
-        SpacerHorizontal8()
+        SpacerHorizontal(8)
         HeaderButton(
             text = "Coming Soon",
             containerColor = Color.Transparent,
-            contentColor = Color.DarkGray,
-            borderColor = Color.DarkGray
+            contentColor = Color.White,
+            borderColor = Color.LightGray
         )
     }
 }
@@ -75,7 +75,7 @@ fun HeaderButtons() {
 @Composable
 fun HeaderButton(
     text: String, containerColor: Color, contentColor: Color,
-    borderColor: Color = Color.DarkGray, onClick: () -> Unit = {}
+    borderColor: Color = Color.Transparent, onClick: () -> Unit = {}
 ) {
     Button(
         onClick = onClick,
@@ -94,7 +94,7 @@ fun HeaderButton(
 
 
 @Composable
-fun ClockImage() {
+fun MovieLength() {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Image(painter = painterResource(id = R.drawable.clock), contentDescription = null)
         Text(
@@ -109,7 +109,7 @@ fun ClockImage() {
 fun MovieTitle() {
     Text(
         text = "Fantastic Beasts: The \n Secrets of Dumbledore",
-        color = Color.Black,
+        color = Black,
         fontFamily = Sans,
         fontWeight = FontWeight.Normal,
         fontSize = 24.sp,
