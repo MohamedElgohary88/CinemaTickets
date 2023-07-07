@@ -28,13 +28,15 @@ import com.example.cinematickets.R
 @Composable
 fun ViewPager() {
     val pagerState = rememberPagerState()
-    Scaffold() {
+    Scaffold(
+        containerColor = Color.Transparent
+    ) {
         HorizontalPager(
             pageCount = imageList.size,
             state = pagerState,
             pageSpacing = (-32).dp,
             contentPadding = PaddingValues(horizontal = 56.dp),
-            modifier = Modifier.fillMaxSize().background(Color.Transparent)
+            modifier = Modifier.fillMaxSize()
         ) { page ->
             val image = imageList[page]
             val imageSizeModifier = if (page == pagerState.currentPage) {
@@ -54,6 +56,7 @@ fun ViewPager() {
         }
     }
 }
+
 
 data class Image(val resId: Int)
 

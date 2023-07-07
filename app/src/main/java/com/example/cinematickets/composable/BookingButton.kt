@@ -18,9 +18,9 @@ import com.example.cinematickets.R
 import com.example.cinematickets.ui.theme.Orange
 
 @Composable
-fun BookingButton() {
+fun BookingButton(text:String,modifier: Modifier = Modifier) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .clip(shape = RoundedCornerShape(32.dp))
             .background(color = Orange)
             .wrapContentSize()
@@ -34,7 +34,7 @@ fun BookingButton() {
                 .align(Alignment.CenterVertically)
         )
         Text(
-            text = "Booking",
+            text = text,
             color = Color.White,
             modifier = Modifier.padding(start = 8.dp, end = 20.dp, top = 12.dp, bottom = 12.dp)
         )

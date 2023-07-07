@@ -38,10 +38,10 @@ import com.example.cinematickets.composable.SpacerHorizontal
 import com.example.cinematickets.composable.SpacerVertical
 import com.example.cinematickets.screens.home_screen.MovieTitle
 import com.example.cinematickets.ui.theme.Black67
-import com.example.cinematickets.ui.theme.TealBlur
-import com.example.cinematickets.ui.theme.OrangeBlur
 import com.example.cinematickets.ui.theme.Orange
+import com.example.cinematickets.ui.theme.OrangeBlur
 import com.example.cinematickets.ui.theme.Sans
+import com.example.cinematickets.ui.theme.TealBlur
 
 @Preview(showSystemUi = true)
 @Composable
@@ -155,7 +155,7 @@ fun MovieDetailsContent() {
                 modifier = Modifier.padding(horizontal = 12.dp)
             )
             SpacerVertical(space = 24)
-            BookingButton()
+            BookingButton("Booking")
         }
     }
 }
