@@ -1,5 +1,6 @@
 package com.example.cinematickets.screens.booking_screen
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -9,13 +10,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -30,10 +33,12 @@ import com.example.cinematickets.ui.theme.Black
 import com.example.cinematickets.ui.theme.GrayBlur
 import com.example.cinematickets.ui.theme.Orange
 import com.example.cinematickets.ui.theme.Sans
+import kotlinx.coroutines.launch
 
-@Preview(showSystemUi = true)
 @Composable
-fun BookingSeatContent() {
+fun BookingSeatContent(onBackButtonClicked: () -> Unit) {
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
         val (columnCinema,
             columnCalendar,
@@ -43,7 +48,7 @@ fun BookingSeatContent() {
             bookingButton, price) = createRefs()
         Column(
             Modifier
-                .height(528.dp)
+                .height(664.dp)
                 .fillMaxWidth()
                 .background(color = Color.Black)
                 .constrainAs(columnCinema) {
@@ -52,15 +57,17 @@ fun BookingSeatContent() {
                     end.linkTo(parent.end)
                 }
         ) {}
-        CloseButton(background = GrayBlur,
+        CloseButton(
+            background = GrayBlur,
             modifier = Modifier.constrainAs(closeButton)
             {
                 start.linkTo(parent.start, margin = 8.dp)
                 top.linkTo(parent.top, margin = 8.dp)
-            })
+            }, onClick = onBackButtonClicked
+        )
         Image(
             painter = painterResource(R.drawable.cinema),
-            contentDescription = "cinema", modifier = Modifier
+            contentDescription = stringResource(R.string.cinema), modifier = Modifier
                 .constrainAs(cinema) {
                     top.linkTo(closeButton.top, margin = 64.dp)
                 }
@@ -68,7 +75,7 @@ fun BookingSeatContent() {
                 .fillMaxWidth()
         )
         CircleWithText(
-            text = "Selected",
+            text = stringResource(R.string.selected),
             textColor = Color.White,
             circleColor = Orange,
             modifier = Modifier.constrainAs(selected) {
@@ -77,7 +84,7 @@ fun BookingSeatContent() {
                 start.linkTo(taken.end, margin = 48.dp)
             })
         CircleWithText(
-            text = "Taken",
+            text = stringResource(R.string.taken),
             textColor = Color.LightGray,
             circleColor = Color.DarkGray,
             modifier = Modifier.constrainAs(taken) {
@@ -87,7 +94,7 @@ fun BookingSeatContent() {
                 end.linkTo(parent.end)
             })
         CircleWithText(
-            text = "Available",
+            text = stringResource(R.string.available),
             textColor = Color.White,
             circleColor = Color.White,
             modifier = Modifier.constrainAs(available) {
@@ -111,16 +118,23 @@ fun BookingSeatContent() {
             HourChips()
             SpacerVertical(space = 16)
         }
-        BookingButton("Buy tickets", modifier = Modifier.constrainAs(bookingButton) {
-            bottom.linkTo(parent.bottom, margin = 16.dp)
-            end.linkTo(parent.end, margin = 16.dp)
-        })
+        BookingButton(
+            stringResource(R.string.buy_tickets),
+            modifier = Modifier.constrainAs(bookingButton) {
+                bottom.linkTo(parent.bottom, margin = 16.dp)
+                end.linkTo(parent.end, margin = 16.dp)
+            }, onClick = {
+                coroutineScope.launch {
+                    Toast.makeText(context, "We wish you a pleasant viewing", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            })
         Column(modifier = Modifier.constrainAs(price) {
             start.linkTo(parent.start, margin = 16.dp)
             bottom.linkTo(parent.bottom, margin = 16.dp)
         }) {
             Text(
-                text = "$100.00",
+                text = stringResource(R.string._100_00),
                 color = Black,
                 fontFamily = Sans,
                 fontWeight = FontWeight.Normal,
@@ -128,7 +142,7 @@ fun BookingSeatContent() {
                 textAlign = TextAlign.Center
             )
             Text(
-                text = "4 tickets",
+                text = stringResource(R.string._4_tickets),
                 color = Color.LightGray,
                 fontFamily = Sans,
                 fontWeight = FontWeight.Normal,

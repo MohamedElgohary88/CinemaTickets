@@ -1,6 +1,7 @@
 package com.example.cinematickets.composable
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -15,12 +16,12 @@ import androidx.compose.ui.unit.dp
 import com.example.cinematickets.R
 
 @Composable
-fun CloseButton(background: Color, modifier: Modifier = Modifier) {
+fun CloseButton(background: Color, modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
             .padding(16.dp)
-            .size(48.dp)
+            .size(48.dp).clickable { onClick() }
     ) {
         Box(
             contentAlignment = Alignment.Center,

@@ -2,6 +2,7 @@ package com.example.cinematickets.composable
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
@@ -18,12 +19,12 @@ import com.example.cinematickets.R
 import com.example.cinematickets.ui.theme.Orange
 
 @Composable
-fun BookingButton(text:String,modifier: Modifier = Modifier) {
+fun BookingButton(text: String, modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
     Row(
         modifier = modifier
             .clip(shape = RoundedCornerShape(32.dp))
             .background(color = Orange)
-            .wrapContentSize()
+            .wrapContentSize().clickable { onClick() }
     ) {
         Image(
             painter = painterResource(id = R.drawable.cart),
