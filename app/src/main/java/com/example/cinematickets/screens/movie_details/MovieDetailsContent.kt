@@ -83,7 +83,7 @@ fun MovieDetailsContent(
                 }
         ) {
             Image(
-                painter = painterResource(id = R.drawable.clock),
+                painter = painterResource(id = R.drawable.ic_clock),
                 contentDescription = null,
                 modifier = Modifier
                     .wrapContentSize()
@@ -110,7 +110,7 @@ fun MovieDetailsContent(
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.play),
+                painter = painterResource(id = R.drawable.ic_play),
                 contentDescription = stringResource(R.string.contentdescription),
                 modifier = Modifier.size(48.dp / 2)
             )

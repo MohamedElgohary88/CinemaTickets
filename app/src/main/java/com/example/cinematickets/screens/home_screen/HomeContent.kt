@@ -110,7 +110,7 @@ fun HeaderButton(
 @Composable
 fun MovieLength() {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Image(painter = painterResource(id = R.drawable.clock), contentDescription = null)
+        Image(painter = painterResource(id = R.drawable.ic_clock), contentDescription = null)
         Text(
             text = "22h 35m",
             color = Color.Black,

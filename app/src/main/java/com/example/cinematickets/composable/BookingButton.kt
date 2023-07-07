@@ -27,7 +27,7 @@ fun BookingButton(text: String, modifier: Modifier = Modifier, onClick: () -> Un
             .wrapContentSize().clickable { onClick() }
     ) {
         Image(
-            painter = painterResource(id = R.drawable.cart),
+            painter = painterResource(id = R.drawable.ic_cart),
             contentDescription = null,
             modifier = Modifier
                 .wrapContentSize()

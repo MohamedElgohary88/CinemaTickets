@@ -30,7 +30,7 @@ fun CloseButton(background: Color, modifier: Modifier = Modifier, onClick: () ->
                 .background(background, shape = CircleShape)
         ) {
             Icon(
-                painter = painterResource(R.drawable.circle),
+                painter = painterResource(R.drawable.ic_circle),
                 contentDescription = null,
                 tint = Color.White
             )
