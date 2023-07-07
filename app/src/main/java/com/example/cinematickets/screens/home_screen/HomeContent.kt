@@ -1,13 +1,14 @@
 package com.example.cinematickets.screens.home_screen
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -18,31 +19,45 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cinematickets.R
 import com.example.cinematickets.composable.BottomNavigation
 import com.example.cinematickets.composable.Chip
+import com.example.cinematickets.composable.ImageBlur
 import com.example.cinematickets.composable.SpacerHorizontal
 import com.example.cinematickets.composable.SpacerVertical
 import com.example.cinematickets.composable.ViewPager
 import com.example.cinematickets.ui.theme.Black
 import com.example.cinematickets.ui.theme.Orange
 import com.example.cinematickets.ui.theme.Sans
+import com.example.cinematickets.view_models.state.HomeUIState
 
-@Preview(showSystemUi = true)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeContent() {
+fun HomeContent(
+    state: HomeUIState, onMovieImageChanged: (Int) -> Unit, onClickMovieImage: () -> Unit
+) {
+    ImageBlur(imagesList = state.imagesList, pagePosition = state.imagePosition)
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
         SpacerVertical(24)
         HeaderButtons()
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .weight(0.8f)) { ViewPager() }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(0.8f)
+        ) {
+            ViewPager(
+                state.imagesList,
+                rememberPagerState(initialPage = 1),
+                onMovieImageChanged,
+                onClickMovieImage
+            )
+        }
         MovieLength()
         SpacerVertical(16)
         MovieTitle()
@@ -75,12 +90,12 @@ fun HeaderButtons() {
 @Composable
 fun HeaderButton(
     text: String, containerColor: Color, contentColor: Color,
-    borderColor: Color = Color.Transparent, onClick: () -> Unit = {}
+    borderColor: Color = Color.Transparent, onClick: () -> Unit = {},
 ) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor),
-        border = BorderStroke(1.dp, borderColor)
+        border = BorderStroke(1.dp, borderColor),
     ) {
         Text(
             text = text,
@@ -92,11 +107,10 @@ fun HeaderButton(
     }
 }
 
-
 @Composable
 fun MovieLength() {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Image(painter = painterResource(id = R.drawable.clock), contentDescription = null)
+        Image(painter = painterResource(id = R.drawable.ic_clock), contentDescription = null)
         Text(
             text = "22h 35m",
             color = Color.Black,
@@ -120,7 +134,8 @@ fun MovieTitle() {
 @Composable
 fun GenresChips() {
     Row {
-        Chip(text = "Fantasy")
-        Chip(text = "Adventure")
+        Chip(text = "Fantasy", false, onClick = {})
+        SpacerHorizontal(space = 4)
+        Chip(text = "Adventure", false, onClick = {})
     }
 }

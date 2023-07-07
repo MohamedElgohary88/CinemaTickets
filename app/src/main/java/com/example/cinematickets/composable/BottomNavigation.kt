@@ -32,10 +32,10 @@ fun BottomNavigation() {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            BottomAppBarItem(drawableResId = R.drawable.movie, selected = true)
-            BottomAppBarItem(drawableResId = R.drawable.search, selected = false)
-            BottomAppBarItem(drawableResId = R.drawable.ticket, selected = false)
-            BottomAppBarItem(drawableResId = R.drawable.user, selected = false)
+            BottomAppBarItem(drawableResId = R.drawable.ic_movie, selected = true)
+            BottomAppBarItem(drawableResId = R.drawable.ic_search, selected = false)
+            BottomAppBarItem(drawableResId = R.drawable.ic_ticket, selected = false)
+            BottomAppBarItem(drawableResId = R.drawable.ic_user, selected = false)
         }
     }
 }

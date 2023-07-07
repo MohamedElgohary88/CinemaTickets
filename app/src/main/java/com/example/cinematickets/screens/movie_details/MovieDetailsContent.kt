@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,36 +24,38 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.cinematickets.R
 import com.example.cinematickets.composable.BookingButton
 import com.example.cinematickets.composable.Chip
+import com.example.cinematickets.composable.CloseButton
 import com.example.cinematickets.composable.ColoredText
 import com.example.cinematickets.composable.PeopleList
 import com.example.cinematickets.composable.SpacerHorizontal
 import com.example.cinematickets.composable.SpacerVertical
 import com.example.cinematickets.screens.home_screen.MovieTitle
-import com.example.cinematickets.ui.theme.Black
 import com.example.cinematickets.ui.theme.Black67
-import com.example.cinematickets.ui.theme.Blur
-import com.example.cinematickets.ui.theme.Blur2
 import com.example.cinematickets.ui.theme.Orange
+import com.example.cinematickets.ui.theme.OrangeBlur
 import com.example.cinematickets.ui.theme.Sans
+import com.example.cinematickets.ui.theme.TealBlur
+import com.example.cinematickets.view_models.MovieDetailsUIState
 
-@Preview(showSystemUi = true)
 @Composable
-fun MovieDetailsContent() {
+fun MovieDetailsContent(
+    state: MovieDetailsUIState,
+    onBookingButtonClicked: () -> Unit,
+    onBackButtonClicked: () -> Unit
+) {
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
         val (play, timer, movieImage, close, bottomSheet) = createRefs()
-
         Image(
-            painter = painterResource(id = R.drawable.movie_details),
-            contentDescription = "movie image",
+            painter = painterResource(id = state.imageUrl),
+            contentDescription = stringResource(R.string.movie_image),
             modifier = Modifier
-                .height(380.dp)
+                .height(420.dp)
                 .fillMaxWidth()
                 .constrainAs(movieImage) {
                     top.linkTo(parent.top)
@@ -62,11 +63,19 @@ fun MovieDetailsContent() {
             contentScale = ContentScale.Crop
         )
 
+        CloseButton(
+            background = OrangeBlur.copy(alpha = .87f),
+            modifier = Modifier.constrainAs(close) {
+                start.linkTo(parent.start)
+                top.linkTo(parent.top)
+            }, onClick = onBackButtonClicked
+        )
+
         Row(
             modifier = Modifier
                 .padding(end = 16.dp)
                 .clip(shape = RoundedCornerShape(16.dp))
-                .background(color = Blur.copy(alpha = .87f))
+                .background(color = TealBlur.copy(alpha = .87f))
                 .constrainAs(timer) {
                     end.linkTo(parent.end)
                     top.linkTo(close.top)
@@ -74,7 +83,7 @@ fun MovieDetailsContent() {
                 }
         ) {
             Image(
-                painter = painterResource(id = R.drawable.clock),
+                painter = painterResource(id = R.drawable.ic_clock),
                 contentDescription = null,
                 modifier = Modifier
                     .wrapContentSize()
@@ -86,30 +95,6 @@ fun MovieDetailsContent() {
                 color = Color.White,
                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
             )
-        }
-
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .padding(16.dp)
-                .size(48.dp)
-                .constrainAs(close) {
-                    start.linkTo(parent.start)
-                    top.linkTo(parent.top)
-                }
-        ) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .size(48.dp)
-                    .background(Blur2.copy(alpha = .87f), shape = CircleShape)
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.circle),
-                    contentDescription = null,
-                    tint = Color.White
-                )
-            }
         }
 
         Box(
@@ -125,8 +110,8 @@ fun MovieDetailsContent() {
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.play),
-                contentDescription = "contentDescription",
+                painter = painterResource(id = R.drawable.ic_play),
+                contentDescription = stringResource(R.string.contentdescription),
                 modifier = Modifier.size(48.dp / 2)
             )
         }
@@ -146,22 +131,35 @@ fun MovieDetailsContent() {
         ) {
             SpacerVertical(space = 32)
             Row {
-                ColoredText("6.8/10", "IMDb", charsInBlack = 3)
+                ColoredText(
+                    stringResource(R.string._6_8_10),
+                    stringResource(R.string.imdb),
+                    charsInBlack = 3
+                )
                 SpacerHorizontal(space = 48)
-                ColoredText("63%", "Rotten Tomatoes", charsInBlack = 3)
+                ColoredText(
+                    stringResource(R.string._63),
+                    stringResource(R.string.rotten_tomatoes),
+                    charsInBlack = 3
+                )
                 SpacerHorizontal(space = 48)
-                ColoredText("4/10", "IGN", charsInBlack = 1)
+                ColoredText(
+                    stringResource(R.string._4_10),
+                    stringResource(R.string.ign),
+                    charsInBlack = 1
+                )
             }
             SpacerVertical(space = 16)
             MovieTitle()
-            SpacerVertical(space = 20)
+            SpacerVertical(space = 24)
             Row {
-                Chip(text = "Fantasy")
-                Chip(text = "Adventure")
+                Chip(text = stringResource(R.string.fantasy), false, onClick = {})
+                SpacerHorizontal(space = 4)
+                Chip(text = stringResource(R.string.adventure), false, onClick = {})
             }
-            SpacerVertical(space = 20)
+            SpacerVertical(space = 24)
             PeopleList()
-            SpacerVertical(space = 20)
+            SpacerVertical(space = 24)
             Text(
                 text = stringResource(R.string.movie_description),
                 color = Black67,
@@ -172,7 +170,7 @@ fun MovieDetailsContent() {
                 modifier = Modifier.padding(horizontal = 12.dp)
             )
             SpacerVertical(space = 24)
-            BookingButton()
+            BookingButton(stringResource(R.string.booking), onClick = onBookingButtonClicked)
         }
     }
 }
