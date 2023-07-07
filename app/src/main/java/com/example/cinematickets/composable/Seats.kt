@@ -77,7 +77,7 @@ fun Seat(seatNumber: Int, isSelected: Boolean, rotationAngle: Float, onClick: ()
     }
     Box(
         modifier = Modifier
-            .size(32.dp)
+            .size(48.dp)
             .rotate(rotationAngle)
     ) {
         IconSeat(modifier = Modifier.fillMaxSize(), tint = seatColor)

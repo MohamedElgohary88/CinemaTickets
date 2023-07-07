@@ -64,7 +64,7 @@ fun BookingSeatContent(onBackButtonClicked: () -> Unit) {
             bookingButton, price) = createRefs()
         Column(
             Modifier
-                .height(664.dp)
+                .height(680.dp)
                 .fillMaxWidth()
                 .background(color = Color.Black)
                 .constrainAs(columnCinema) {
@@ -74,7 +74,7 @@ fun BookingSeatContent(onBackButtonClicked: () -> Unit) {
                 }
         ) {}
         SeatsLayout(modifier = Modifier.constrainAs(seats){
-            top.linkTo(cinema.bottom, margin = 24.dp)
+            top.linkTo(cinema.bottom, margin = 16.dp)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
         })
@@ -83,7 +83,7 @@ fun BookingSeatContent(onBackButtonClicked: () -> Unit) {
             modifier = Modifier.constrainAs(closeButton)
             {
                 start.linkTo(parent.start, margin = 16.dp)
-                top.linkTo(parent.top, margin = 24.dp)
+                top.linkTo(parent.top, margin = 8.dp)
             }, onClick = onBackButtonClicked
         )
         Image(
@@ -119,7 +119,7 @@ fun BookingSeatContent(onBackButtonClicked: () -> Unit) {
             textColor = Color.White,
             circleColor = Color.White,
             modifier = Modifier.constrainAs(available) {
-                bottom.linkTo(columnCinema.bottom, margin = 64.dp)
+                bottom.linkTo(columnCinema.bottom, margin =48.dp)
                 end.linkTo(taken.start, margin = 48.dp)
             })
         Column(
